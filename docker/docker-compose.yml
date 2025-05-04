@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: courseRec-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: courseRecRootPassword  # Change to a secure password
+      MYSQL_DATABASE: courseRec         # Name of your database
+      MYSQL_USER: courseRec_user        # Custom user for your database
+      MYSQL_PASSWORD: courseRec_password # Password for the custom user
+    ports:
+      - "3306:3306" # Expose MySQL on port 3306
+    volumes:
+      - mysql_data:/var/lib/mysql       # Persist database data
+      - ./init:/docker-entrypoint-initdb.d:ro # Optional: Custom SQL scripts
+
+volumes:
+  mysql_data:

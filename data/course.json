@@ -1,0 +1,1020 @@
+{
+  "COIS": {
+    "100 Level": {
+      "1010": {
+        "Name": "The Digital World",
+        "Description": "Digital systems have redefined how we work, communicate, and play-just think about the World Wide Web, mobile camera phones, video games, and e-business. Core topics examine the underlying technologies of both computing and information systems and how they have become an integral and indispensable part of our daily lives.",
+        "Length": "H",
+        "Location": ["Online"],
+        "Term": ["FA", "WI"],
+        "Pre-requisites": null,
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": ["MDST 1010H"],
+        "Restrictions": null
+      },
+      "1020": {
+        "Name": "Programming for Computing Science",
+        "Description": "Programming for computer science requires a solid foundation in the software development process, including algorithmic design, abstraction, implementation, testing, and documentation. Core topics include sequencing, selection, iteration, simple data types, expressions, and arrays, as well as the object-oriented notions of classes, methods, inheritance, and polymorphism.",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["FA", "WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Alternative prerequisites",
+            "Courses": ["COIS 1010H", "PHYS 1001H", "MATH 1110H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "OR"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "1400": {
+        "Name": "Introduction to Data Science",
+        "Description": "Develops a solid foundation in the main concepts of data science and programming in Python. Core topics include repetition and selection structures, algorithm design techniques, file types, big data, data mining, and data visualization.",
+        "Length": "H",
+        "Location": ["Online"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Single prerequisite",
+            "Courses": ["COIS 1020H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "1620": {
+        "Name": "Introduction to Information Systems",
+        "Description": "Wherever and whenever information is required, an information system is also required. Core topics include the use of information systems for strategic advantage, their basic underlying technologies, the types of information systems and how they are constructed, managed, and replaced, as well as their ethical and legal use",
+        "Length": "H",
+        "Location": ["Online"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Single prerequisite",
+            "Courses": ["COIS 1010H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": ["ADMN 1620H"],
+        "Restrictions": null
+      }
+    },
+    "200 Level": {
+      "2020": {
+        "Name": "Data Structures and Algorithms",
+        "Description": "Data structures define how data are represented. Algorithms define how data structures are manipulated. Using more advanced programming language features, core topics include arrays, linked lists, hash tables, binary heaps, and binary search trees. ",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["FA", "WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Single prerequisite",
+            "Courses": ["COIS 1020H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": ["MATH 1350H"],
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "2040": {
+        "Name": "Object Oriented Programming",
+        "Description": "The C language is utilized to examine object-oriented concepts. These concepts can include classes, objects, inheritance, encapsulation, polymorphism, class deviation, abstract classes, interfaces, static class members, object construction and destruction, exceptional handling, function overloading and overriding, overload resolution, container classes, and/or template classes. Also includes an introduction to Git and GitHub.",
+        "Length": "H",
+        "Location": ["Peterborough"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Single prerequisite",
+            "Courses": ["COIS 1020H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "2240": {
+        "Name": "Software Design and Modelling",
+        "Description": "Good software design and modelling is a necessary prerequisite for the production of software which is correct, robust, and maintainable. Using the standard Unified Modeling Language (UML) to specify design, core topics include use cases; classes and class membership; aggregation, composition, and inheritance; virtual functions and polymorphism; state diagrams; and design patterns. The course also covers object-oriented concepts using the Java language.",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["FA", "WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Alternative prerequisites",
+            "Courses": ["COIS 1020H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "OR"
+          },
+          {
+            "Requirement": "Alternative prerequisites",
+            "Courses": ["COIS 1520H", "COIS-ADMN 2620H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "AND"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "2250": {
+        "Name": "Electronics",
+        "Description": "An applied course in the electronic circuits most commonly used in laboratory sciences. Circuit theory, test instruments, operational amplifiers, semiconductor theory, measurement sensors, power control, digital circuits, computer process-control and data collection, AC circuit theory, filters, DC power supplies, RC timing circuits, amplifiers, oscillators.",
+        "Length": "H",
+        "Location": ["Peterborough"],
+        "Term": ["FA"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Grade requirement",
+            "Courses": ["PHYS 1002H", "MATH 1120H"],
+            "Credits": null,
+            "Grade": "60%",
+            "Logic": "AND"
+          },
+          {
+            "Requirement": "Departmental permission",
+            "Courses": [],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "OR"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "2300": {
+        "Name": "Computer Organization",
+        "Description": "Computer organization is the level of abstraction between the digital logic and the operating system. At this level, computing subsystems refer to hardware pieces built from lower-level building blocks. Core topics include the central processing unit, memory hierarchy, and input/output organization. Topics are supplemented with assembly language programming.",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["FA", "WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Alternative prerequisites",
+            "Courses": ["COIS 1020H", "COIS 1520H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "OR"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "2320": {
+        "Name": "Digital Logic",
+        "Description": "Digital logic describes how computer hardware actually works at the logic gate and circuit level. Core topics include Boolean algebra, Karnaugh maps, the minimization of Boolean functions and the design of combinational and sequential circuits, including adders, decoders, multiplexers, flip-flops, and memory circuits.",
+        "Length": "H",
+        "Location": ["Online"],
+        "Term": null,
+        "Pre-requisites": [
+          {
+            "Requirement": "Alternative prerequisites",
+            "Courses": ["COIS 1020H", "COIS 1520H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "OR"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "2400": {
+        "Name": "R in Data Science",
+        "Description": "An introduction to the programming language R and its applications in data science. A wide range of topics are covered, with emphasis on techniques for data gathering, cleaning and manipulation, text and numerical analysis, and visualization to provide relevant applications in data science.",
+        "Length": "H",
+        "Location": ["Peterborough"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Single prerequisite",
+            "Courses": ["COIS 1400H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "2410": {
+        "Name": "Symbolic Logic",
+        "Description": "An introductory study of formal logical systems, together with their use in the analysis of various types of arguments.",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["FA", "WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Credit-based prerequisite or department permission",
+            "Courses": null,
+            "Credits": "4.0 university credits",
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": ["PHIL 2410H"],
+        "Restrictions": null
+      },
+      "2430": {
+        "Name": "Web Development 1: Front-End",
+        "Description": "Front-end web development requires a strong understanding of the technologies used on the client side of a web application. Topics include front-end languages HTML, CSS, and JavaScript, as well as important concepts like responsive design, accessibility, usability, version control, and regular expressions.",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["FA", "WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Alternative prerequisites",
+            "Courses": ["COIS 1020H", "COIS 1400H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "OR"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": "Not open to students with credit for COIS 3420H"
+      },
+      "2520": {
+        "Name": "Professionalism and Ethics in Computing",
+        "Description": "Identifies and explores some of the fundamental social, legal, and ethical issues inherent in the discipline of computing. Topics include social context, analytical tools, professional ethics, intellectual property, privacy and civil liberties, professional communication, and equity issues.",
+        "Length": "H",
+        "Location": ["Online"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Single prerequisite",
+            "Courses": ["COIS 1020H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "2600": {
+        "Name": "Discrete 1: Structures",
+        "Description": "Mathematics related to computer science, including propositional logic, sets and relations, proofs, counting techniques and recursive relations, trees and networks (graphs); applications.",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["FA", "WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Alternative prerequisites",
+            "Courses": [
+              ["MATH 1350H and MATH 1120H"],
+              ["COIS 1020H and MATH 1350H and MATH 1005H"],
+              ["COIS 1020H and MATH 1350H and MATH 1110H"]
+            ],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "OR"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": ["MATH 2600H"],
+        "Restrictions": null
+      },
+      "2620": {
+        "Name": "Systems Analysis and Design",
+        "Description": "Systems analysis and design identifies the informational needs/resources of an organization and specifies appropriate information systems to meet the needs and exploit the resources for strategic advantage. Core topics include the current methodologies, techniques, and tools used for both the analysis and design. Managerial and organizational issues are also discussed.",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["FA"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Single prerequisite",
+            "Courses": ["COIS-ADMN 1620H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": ["ADMN 2620H"],
+        "Restrictions": null
+      },
+      "2750": {
+        "Name": "Computer Crime and Forensics",
+        "Description": "Computer crime is the fastest-growing area of illegal activity in the world. Users beware After some background information (how computers work, number systems, information-hiding algorithms), we examine the schemes and techniques used by computer criminals, the forensic techniques used to catch the criminals, and ways to prevent victimization.",
+        "Length": "H",
+        "Location": ["Online"],
+        "Term": ["WI"],
+        "Pre-requisites": null,
+        "Recommended": ["COIS 1010H"],
+        "Co-requisites": null,
+        "Cross-Listed": ["FRSC-2750H"],
+        "Restrictions": null
+      },
+      "2800": {
+        "Name": "Digital Culture",
+        "Description": "Interactive digital technology and the convergence of computing, communications, public media, and entertainment have had profound cultural implications. Core topics address current concerns such as the World Wide Web, multimedia design, virtual spaces, social domains, and the blogosphere.",
+        "Length": "H",
+        "Location": ["Durham GTA"],
+        "Term": ["FA"],
+        "Pre-requisites": null,
+        "Recommended": ["COIS 1010H"],
+        "Co-requisites": null,
+        "Cross-Listed": ["MDST 2800H"],
+        "Restrictions": "it cannot be counted as a science credit true"
+      },
+      "2830": {
+        "Name": "Multimedia and Design",
+        "Description": "Multimedia concepts such as photo and video editing, visual effects, 3D assets, and even writing style serve as tools to explore concepts and challenges in modern user experience design, with a focus on web pages, game design, and user interfaces. Principles of design covers core concepts such as the discoverability of features, understanding diverse human users, complexity of feedback, and how computer systems interpret and react to human actions.",
+        "Length": "H",
+        "Location": ["Durham GTA"],
+        "Term": ["WI"],
+        "Pre-requisites": null,
+        "Recommended": ["COIS 1010H"],
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      }
+    },
+
+    "300 Level": {
+      "3020": {
+        "Name": "Data Structures and Algorithms 2",
+        "Description": "A continuation of COIS 2020H, this course introduces more complex data structures and algorithmic techniques. Core topics include adjacency matrices and lists, randomly built binary search trees, augmented data structures, tries, binomial heaps, B-trees, disjoint sets, and quad trees.",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["FA", "WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Single prerequisite",
+            "Courses": ["COIS 2020H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": ["COIS-MATH 2600H"],
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "3030": {
+        "Name": "Software Specification and Development",
+        "Description": "The development of large software systems relies on sound methodologies and techniques to manage the inherent complexity and to produce quality software which satisfies the client or customer. Core topics include various software development paradigms and their usage, as well as the importance of feasibility studies, requirements analysis, and specification.",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["FA"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Single prerequisite",
+            "Courses": ["COIS 2240H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "3040": {
+        "Name": "Advanced Software Architecture and Design",
+        "Description": "Software architecture is concerned with the highlevel design, interface, and relationships among the components that make up a software system. Testing ensures that these components work properly on their own and within an integrated system. Core topics include architecture description languages, as well as maintenance strategies and various testing methodologies.",
+        "Length": "H",
+        "Location": ["Peterborough"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Multiple prerequisites",
+            "Courses": ["COIS 2020H", "COIS 3030H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "AND"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "3050": {
+        "Name": "Formal Languages and Automata",
+        "Description": "Formal languages and automata are the underlying theoretical foundations of computer science. Core topics include regular languages and finite automata, context-free languages and pushdown automata, the Turing machine and its languages. Real world applications, unsolvable problems, and their relevance to the semantics of programming are also discussed.",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Single prerequisite",
+            "Courses": ["COIS 1020H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": ["COIS-MATH 2600H"],
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+
+      "3180": {
+        "Name": "Numerical and Computational Methods",
+        "Description": "Error analysis, nonlinear equations, linear systems, interpolation methods, numerical differentiation and integration and initial value problems.",
+        "Length": "H",
+        "Location": ["Peterborough"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Single prerequisite",
+            "Courses": ["MATH 2110H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": ["MATH-3180H"],
+        "Restrictions": "Not open to students with credit for MATH-COIS 2180H"
+      },
+      "3200": {
+        "Name": "Electricity and Magnetism",
+        "Description": "Electrostatics, magnetostatics, electric and magnetic properties of matter, Maxwell's equations, electromagnetic wave propagation.",
+        "Length": "Y",
+        "Location": ["Peterborough"],
+        "Term": ["FA", "WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Multiple prerequisites with grade",
+            "Courses": ["PHYS-MATH 2150H", "MATH 2110H", "MATH 2120H"],
+            "Credits": null,
+            "Grade": "60% or higher in PHYS 1002H",
+            "Logic": "OR"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": ["PHYS-3200Y"],
+        "Restrictions": null
+      },
+      "3270": {
+        "Name": "Philosophy of Artificial Intelligence",
+        "Description": "An examination of philosophical questions pertaining to artificial intelligence (AI) and the role AI plays in society. The first part treats the history, nature, and limits of AI. The second part turns to more applied questions related to ethics, and the social and political implications of AI.",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["FA"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Single prerequisite",
+            "Courses": null,
+            "Credits": ["7.0 university credits"],
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": ["PHIL 3270H"],
+        "Restrictions": null
+      },
+      "3320": {
+        "Name": "Fundamentals of Operating Systems",
+        "Description": "An operating system is the software component of a computing system which is responsible for the management and accessibility of the hardware resources. Core topics include process management, synchronization, processor allocation, primary and secondary storage management, file management, security, and user interfaces. Topics are illustrated using contemporary operating systems.",
+        "Length": "H",
+        "Location": ["Peterborough"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Multiple prerequisites",
+            "Courses": ["COIS 2020H", "COIS 2300H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "AND"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "3370": {
+        "Name": "Cyberethics",
+        "Description": "Enables students to develop their own positions about the most important social and moral problems raised by computer use and technologies, including the fragmentation of society into computer 'haves' and 'have-nots,' Internet censorship, pornography, intellectual property rights, and software piracy.",
+        "Length": "H",
+        "Location": ["Online"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Single prerequisite",
+            "Courses": null,
+            "Credits": ["7.0 university credits"],
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": ["PHIL-3370H", "MDST-3370H"],
+        "Restrictions": null
+      },
+      "3380": {
+        "Name": "Systems Programming in C",
+        "Description": "Systems programming produces software which provides services to the computer hardware. Using systems programming techniques in a Unix-style environment and using machine-oriented programming languages such as C/C++, core topics include procedural programming, shell programming, pipes, file processing, system calls, signals, and basic network programming.",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Alternative prerequisites",
+            "Courses": ["COIS 2020H", "COIS 2300H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "OR"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "3400": {
+        "Name": "Database Management Systems",
+        "Description": "A database is a structured collection of data, whereas a database management system facilitates the creation, querying, and maintenance of databases. Core topics include the relational model, entity-relationship diagrams, relational algebra, SQL, database application development, storage and indexing, and normalization. Topics are illustrated using a relational DBMS.",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["FA"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Alternative prerequisites",
+            "Courses": [["COIS 1020H"], ["COIS 1520H and COIS-ADMN 2620H"]],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "OR"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "3430": {
+        "Name": "Web Development 2: Server-Side and Frameworks",
+        "Description": "Following the foundations set in COIS 2430H, this course encourages the exploration of more advanced topics in web applications, including design patterns, server-side programming, database integration, APIs, security, and front-end frameworks, along with development processes like build tools, testing and CI/CD.",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["FA", "WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Alternative prerequisites",
+            "Courses": ["COIS 2430H", "COIS 3420H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "OR"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": ["COIS 3400H"],
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "3510": {
+        "Name": "Data Visualization",
+        "Description": "Data visualization is a main step in the analysis of data in a wide range of scientific research areas as well as business applications. We discuss general approaches, tools, and techniques for the visualization of various types of data, including spatial data, graph data, and time series data.",
+        "Length": "H",
+        "Location": ["Peterborough"],
+        "Term": ["FA"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Credit-based prerequisite or department permission",
+            "Courses": null,
+            "Credits": "10.0 university credits",
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": ["COIS 1020H", "COIS 1520H"],
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "3533": {
+        "Name": "Game Studies",
+        "Description": "An introduction to game studies that explores the implications of games and play. What can games tell us about what we value, how we think, and who we are?",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["FA"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Credit-based prerequisite",
+            "Courses": null,
+            "Credits": "4.0 university credits",
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": ["CUST-3533H", "MDST-3533H"],
+        "Restrictions": null
+      },
+      "3550": {
+        "Name": "Applied Artificial Intelligence and Machine Learning",
+        "Description": "Fundamental artificial intelligence (AI) and machine learning concepts, algorithms, and techniques. The focus is on why and what can be done, along with available tools and applications in solving real-world problems, rather than the finer details of how it could be built. The course uses TensorFlow with provided Python code.",
+        "Length": "H",
+        "Location": ["Durham GTA"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Single prerequisite",
+            "Courses": ["COIS 1020H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "3560": {
+        "Name": "Human-Computer Interaction",
+        "Description": "The study of human-computer interaction incorporates ideas from computer science, behavioural science, and design to improve interaction between people and computers. Core topics include multidisciplinary, intuitive design, computer-supported co-operative education/work, ubiquitous computing, prototyping, collaboration, social interaction, augmented reality, haptics, heuristics, interfaces, workstation independence.",
+        "Length": "H",
+        "Location": ["Durham GTA"],
+        "Term": ["FA", "WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Credit-based prerequisite",
+            "Courses": null,
+            "Credits": "5.0 university credits",
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": ["MDST-3560H"],
+        "Restrictions": null
+      },
+      "3750": {
+        "Name": "Principles of Online Marketing",
+        "Description": "Businesses today must effectively leverage the Internet and develop an online strategy which complements their traditional business practices. Core topics include website best practices, online marketing and customer relationships, positioning businesses online, and social networking for small and large enterprises. Topics are consolidated with a professional business proposal.",
+        "Length": "H",
+        "Location": ["Online"],
+        "Term": ["FA", "WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Alternative prerequisites",
+            "Courses": ["COIS-ADMN 1620H", "ADMN 1000H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "OR"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": ["ADMN-3750H"],
+        "Restrictions": null
+      },
+      "3820": {
+        "Name": "History and Impact of Computing",
+        "Description": "The history of digital computation is relatively recent, but all around us. By introducing the key people whose insight, inventiveness, and industry have defined the digital world, a framework is developed within which all students can appreciate the fundamental milestones of computing and their impact on the world.",
+        "Length": "H",
+        "Location": ["Online"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Credit-based prerequisite",
+            "Courses": null,
+            "Credits": "5.0 university credits",
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": ["MDST-3820H"],
+        "Restrictions": null
+      },
+      "3850": {
+        "Name": "Fundamentals of Project Management",
+        "Description": "Good project management focuses on the practical realities of getting things done with limited time and resources according to specifications determined by others--with successful outcomes. This course prepares students to write the professional certification exams offered by the Project Management Institute and the Project Management Association of Canada.",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["FA", "WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Alternative prerequisites with credits",
+            "Courses": ["COIS 2240H", "COIS-ADMN 2620H"],
+            "Credits": "10.0 university credits",
+            "Grade": null,
+            "Logic": "OR"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": ["ADMN-3850H"],
+        "Restrictions": null
+      },
+      "3860": {
+        "Name": "Internship Project",
+        "Description": "Students work at a site external to the department for 80-120 hours. In recognition of the scope of possible projects, this work can either be performed during 2-3 one-week (not necessarily consecutive) sessions, or during 10-15 full-day sessions in consecutive weeks. Students meet on a regular basis with their faculty mentor.",
+        "Length": "H",
+        "Location": ["Peterborough"],
+        "Term": ["FA", "WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Multiple prerequisites with credits and grade",
+            "Courses": null,
+            "Credits": "10.0 university credits, including 5.0 COIS credits",
+            "Grade": "Minimum 75% cumulative average",
+            "Logic": "AND"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      }
+    },
+    "400 Level": {
+      "4000": {
+        "Name": "Software Engineering Project",
+        "Description": "The software engineering project is a capstone course and provides students with the practical experience in the analysis, design, implementation, testing, and documentation of a real-world software product. Working as a team with clients, the project draws substantially on the theoretical knowledge gained in all previous COIS courses.",
+        "Length": "Y",
+        "Location": ["Peterborough"],
+        "Term": ["FA", "WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Single prerequisite",
+            "Courses": ["COIS 3040H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": ["COIS 3400H", "COIS 3430H"],
+        "Co-requisites": ["COIS-ADMN 3850H"],
+        "Cross-Listed": null,
+        "Restrictions": "Not open to students with credit for COIS 4850H"
+      },
+      "4050": {
+        "Name": "Advanced Algorithms",
+        "Description": "Algorithmic techniques provide generalized approaches to solving a wide variety of problems. Algorithmic analysis provides the basis of comparison among different solutions. Core topics include the algorithmic techniques of divide-and-conquer, dynamic programming, greedy algorithms, approximation algorithms, and string matching as well as the analytical techniques of problem classification, asymptotic analysis, amortized analysis, and recurrence relations.",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["FA"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Multiple prerequisites",
+            "Courses": ["COIS 2020H", "COIS-MATH 2600H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "AND"
+          }
+        ],
+        "Recommended": ["COIS 3020H"],
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "4100": {
+        "Name": "Comparative Programming Languages",
+        "Description": "Evaluating and selecting the most appropriate programming language for an application is a critical step in software development. Core topics include the types of programming languages as well as the principal design and implementation issues for control structures, data types, subprograms, exception handling, and concurrency.",
+        "Length": "H",
+        "Location": ["Peterborough"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Multiple prerequisites with credits",
+            "Courses": ["COIS 2020H"],
+            "Credits": "1.0 COIS credit at the 3000 or 4000 level",
+            "Grade": null,
+            "Logic": "AND"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "4310": {
+        "Name": "Computer Networks",
+        "Description": "A computer network links together two or more computers to enable the transfer of data. Core topics include data communication, network hardware and software, network architecture and protocols, local area and wide area networks, end-to-end routing protocols, wireless networks, Quality of Service, multimedia support, and network management.",
+        "Length": "H",
+        "Location": ["Peterborough"],
+        "Term": ["FA"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Single prerequisite",
+            "Courses": ["COIS 3320H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "4350": {
+        "Name": "High Performance Computing",
+        "Description": "High performance computing is the use of advanced computer architectures to solve problems which require significant processing power, memory access, or storage. Core topics include advanced computer architectures, programming for shared and distributed memory machines, networking issues, caching, performance evaluation, and parallel algorithms. Topics are supplemented with case studies.",
+        "Length": "H",
+        "Location": ["Peterborough"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Alternative prerequisites",
+            "Courses": ["COIS 3320H", "COIS 3380H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "OR"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "4370": {
+        "Name": "Computer and Information Security",
+        "Description": "Security of data and information systems is a vital component of an organization's infrastructure. Core topics include the key concepts and legal implications of information security, risk and security management, asset security, and principles and policies for securing data. Attention is given to the methods of confirming and monitoring compliance to agreed-upon policies.",
+        "Length": "H",
+        "Location": ["Peterborough"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Alternative prerequisites",
+            "Courses": ["COIS 3320H", "COIS 3380H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "OR"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "4400": {
+        "Name": "Data Mining",
+        "Description": "Data mining is the extraction of previously unknown and potentially useful patterns from large data sets. Core topics include the statistical foundations of data mining, sampling mechanisms, missing data, clustering, classification, and outlier detection. Case studies cover a wide variety of applications such as astronomy and marketing.",
+        "Length": "H",
+        "Location": ["Online"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Multiple prerequisites with credits",
+            "Courses": [["COIS 2020H", "COIS-ADMN 2620H"]],
+            "Credits": "1.0 COIS credit at the 3000 or 4000 level",
+            "Grade": null,
+            "Logic": "OR"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "4450": {
+        "Name": "Big Data",
+        "Description": "Big data applications are encompassing commercial and scientific, moving towards exascale analytics. Students from a variety of disciplines are introduced to the challenges and opportunities in this field, with the goal of providing them with theoretical and hands-on experience in the area of big data analytics.",
+        "Length": "H",
+        "Location": ["Peterborough"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Multiple prerequisites",
+            "Courses": ["COIS 3380H", "COIS 3510H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "AND"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "4470": {
+        "Name": "Modelling and Simulation",
+        "Description": "Modelling and simulation enables us to construct mathematical or computer-based representations of real-world phenomena. Three steps are typically followed: modelling the key parameters, implementing a program to simulate behaviour, and analyzing the results. Core topics include pseudo-random number generation, discrete-event and next-event simulation, output analysis, and queuing theory.",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Multiple prerequisites",
+            "Courses": ["MATH 1550H", "COIS 2020H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "AND"
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "4480": {
+        "Name": "Computer Graphics",
+        "Description": "Computer graphics are everywhere, from computer-animated movies and games to virtual reality and telepresence. This course introduces the fundamental mathematical and computational concepts of computer graphics. Topics include hardware, the OpenGL suite, line drawing, two-dimensional transformations, two-dimensional clipping algorithms, three-dimensional representations, three-dimensional clipping, line removal techniques, splines, and ray tracing.",
+        "Length": "H",
+        "Location": ["Peterborough"],
+        "Term": ["FA"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Multiple prerequisites",
+            "Courses": ["COIS 2020H", "MATH 1350H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "AND"
+          }
+        ],
+        "Recommended": ["MATH 1110H"],
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "4550": {
+        "Name": "Artificial Intelligence",
+        "Description": "Artificial intelligence is the study of those techniques which create perceptions of 'machine intelligence' and 'intelligent agents.' Topics may include but are not limited to expert systems, various evolutionary learning systems such as genetic algorithms, genetic programming, and neural networks. The impact and ethics of artificial intelligence are also examined.",
+        "Length": "H",
+        "Location": ["Peterborough", "Durham GTA"],
+        "Term": ["FA", "WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Credit-based prerequisite",
+            "Courses": ["COIS 2020H"],
+            "Credits": "10.0 university credits",
+            "Grade": null,
+            "Logic": null
+          }
+        ],
+        "Recommended": null,
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": null
+      },
+      "4850": {
+        "Name": "Information Systems Project",
+        "Description": "A capstone course which provides students with the practical experience in the analysis and design (but not implementation) of a real-world information system. Working as a team with clients, the project draws substantially on the theoretical knowledge gained in all previous COIS courses.",
+        "Length": "H",
+        "Location": ["Durham GTA"],
+        "Term": ["WI"],
+        "Pre-requisites": [
+          {
+            "Requirement": "Multiple prerequisites",
+            "Courses": ["COIS-ADMN 2620H", "COIS 3030H", "COIS 3850H"],
+            "Credits": null,
+            "Grade": null,
+            "Logic": "AND"
+          }
+        ],
+        "Recommended": ["COIS 3400H"],
+        "Co-requisites": null,
+        "Cross-Listed": null,
+        "Restrictions": "Not open to students with credit for COIS 4000Y"
+      }
+    }
+  }
+}
