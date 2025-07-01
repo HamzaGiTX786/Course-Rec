@@ -1,8 +1,9 @@
-// src/pages/Dashboard.jsx
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaPaperPlane } from 'react-icons/fa';
-// import ChatSidebar from '../components/ChatSidebar';
+import ChatSidebar from '../components/ChatSidebar';
+
+import api from '../utils/axiosInstance';
 
 export default function Dashboard() {
   const [input, setInput] = useState('');
@@ -25,7 +26,7 @@ export default function Dashboard() {
 
   return (
     <div className="flex min-h-screen bg-gray-900 text-white">
-      {/* <ChatSidebar /> */}
+      <ChatSidebar />
       <div className="flex-1 flex flex-col p-4">
         <motion.div 
           initial={{ opacity: 0, y: -10 }} 

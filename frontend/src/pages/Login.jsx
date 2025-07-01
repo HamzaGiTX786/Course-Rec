@@ -1,9 +1,9 @@
-// src/pages/Login.jsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import axios from 'axios';
 import { useAuth } from '../utils/AuthProvider';
+
+import api from '../utils/axiosInstance';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -17,7 +17,7 @@ export default function Login() {
     setError('');
 
     try {
-      const response = await axios.post('/users/login', 
+      const response = await api.post('/users/login', 
         { "email": email, 
           "password": password 
         }, 
