@@ -174,3 +174,26 @@ def all_conversations(request):
     data = [{'conversation_id': conversation.conversationid, 'title': conversation.conversationName} for conversation in conversations]
 
     return Response({'data': data}, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def rename_conversation(request):
+    """
+    Rename a conversation for the authenticated user.
+    """
+    user = request.user
+    data = request.data
+
+    conversation_id = data.get('conversation_id')
+    new_name = data.get('new_name')
+
+    if not conversation_id or not new_name:
+        return Response({'message': 'Conversation ID and new name are required'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        conversation = Conversation.objects.get(userid_id=user.id, conversationid=conversation_id)
+        conversation.conversationName = new_name
+        conversation.save()
+        return Response({'message': 'Conversation renamed successfully'}, status=status.HTTP_200_OK)
+    except Conversation.DoesNotExist:
+        return Response({'message': 'Conversation not found'}, status=status.HTTP_404_NOT_FOUND)

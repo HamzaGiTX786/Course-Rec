@@ -9,4 +9,5 @@ urlpatterns = [
     path('logout/', views.logout),
     path('conversation/', views.get_conversations),
     path('all-conversations/', views.all_conversations),
+    path('rename-conversation/', views.rename_conversation),
 ]

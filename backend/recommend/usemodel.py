@@ -3,7 +3,7 @@ import openai
 import os
 from pathlib import Path
 
-from backend.coursrec import settings
+from coursrec import settings
 
 client = OpenAI()
 client.api_key = settings.OPENAI_API_KEY
