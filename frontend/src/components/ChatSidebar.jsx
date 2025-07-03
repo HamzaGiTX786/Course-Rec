@@ -25,7 +25,10 @@ export default function ChatSidebar() {
 
   const handleRename = async (id) => {
     try {
-      await api.put(`/api/conversations/${id}/`, { name: editedName });
+      await api.post(`/users/rename-conversations/`, 
+        { new_name: editedName,
+          conversation_id: id
+         });
       setConversations(prev =>
         prev.map(conv => (conv.id === id ? { ...conv, name: editedName } : conv))
       );
@@ -37,7 +40,7 @@ export default function ChatSidebar() {
   };
 
   const filteredConversations = conversations.filter(conv =>
-    conv.name.toLowerCase().includes(searchTerm.toLowerCase())
+    conv.conversationName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -58,17 +61,17 @@ export default function ChatSidebar() {
       <div className="space-y-2 overflow-y-auto max-h-[calc(100vh-120px)]">
         {filteredConversations.map((conv) => (
           <div
-            key={conv.id}
+            key={conv.conversationid}
             className="bg-gray-700 hover:bg-gray-600 p-3 rounded-lg flex justify-between items-center"
           >
-            {editingId === conv.id ? (
+            {editingId === conv.conversationid ? (
               <>
                 <input
                   value={editedName}
                   onChange={(e) => setEditedName(e.target.value)}
                   className="bg-gray-600 p-1 rounded text-white flex-1 mr-2"
                 />
-                <button onClick={() => handleRename(conv.id)}>
+                <button onClick={() => handleRename(conv.conversationid)}>
                   <FiCheck className="text-green-400" />
                 </button>
               </>

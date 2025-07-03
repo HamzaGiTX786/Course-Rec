@@ -18,8 +18,8 @@ export default function Login() {
 
     try {
       const response = await api.post('/users/login', 
-        { "email": email, 
-          "password": password 
+        { email: email, 
+          password: password
         }, 
         {
         withCredentials: true // for cookie
