@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+/* Global Font Style */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+}
+
+.text-purple-500 {
+  font-family: 'Poppins', sans-serif; /* Apply this to headers and text you want bold & stylish */
+}
