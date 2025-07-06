@@ -1,7 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaArrowRight, FaUserFriends, FaRobot, FaClock, 
-         FaChartLine, FaCalendarAlt, FaShieldAlt, FaSearch, 
-         FaRegClock, FaQuestionCircle } from 'react-icons/fa';
+import {
+  FaArrowRight, FaUserFriends, FaRobot, FaClock,
+  FaChartLine, FaCalendarAlt, FaShieldAlt, FaSearch,
+  FaRegClock, FaQuestionCircle
+} from 'react-icons/fa';
 
 import FadeInSection from '../components/FadeInSection';
 import Navbar from '../components/Navbar';
@@ -23,6 +26,7 @@ const fadeInUp = {
 };
 
 export default function LandingPage() {
+  const navigate = useNavigate();
   const features = [
     {
       icon: <FaRobot />,
@@ -59,16 +63,17 @@ export default function LandingPage() {
   return (
     <div className="bg-gray-900 text-white">
       <Navbar />
+
       {/* HERO SECTION */}
-      <section className="min-h-screen flex flex-col justify-center items-center px-6 text-center bg-gray-900">
+      <section className="min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 text-center bg-gray-900">
         <motion.h1
-          className="text-5xl md:text-6xl font-bold mb-4 text-purple-500"
+          className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 text-purple-500"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          CourseRec<span className='text-white'>.</span>
+          CourseRec<span className="text-white">.</span>
         </motion.h1>
-        <p className="text-xl md:text-2xl text-gray-300 max-w-2xl">
+        <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-xl sm:max-w-2xl">
           Your AI-Powered Course Recommender — anytime, anywhere.
         </p>
 
@@ -80,82 +85,100 @@ export default function LandingPage() {
           <FaArrowRight className="inline ml-2" />
         </a>
 
-        <div className="mt-10 w-80 h-52 bg-gray-800 rounded-xl border border-dashed border-gray-600 flex items-center justify-center text-gray-400">
+        <div className="mt-10 w-full max-w-xs sm:max-w-sm h-52 bg-gray-800 rounded-xl border border-dashed border-gray-600 flex items-center justify-center text-gray-400">
           Graphic Placeholder
         </div>
       </section>
 
       {/* PROBLEM SECTION */}
-      <section className="py-24 px-6 bg-gray-800 text-white text-center">
+      <section className="py-20 px-4 sm:px-6 bg-gray-800 text-white text-center">
         <div className="max-w-4xl mx-auto">
           <FadeInSection>
-            <h2 className="text-4xl font-bold mb-4 text-purple-500">Feeling Lost Picking Courses?</h2>
-            <p className="text-lg text-white mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-purple-500">
+              Feeling Lost Picking Courses?
+            </h2>
+            <p className="text-md sm:text-lg text-white mb-12">
               You're not alone - students face real challenges planning their academic journey. Sound familiar?
             </p>
           </FadeInSection>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[{ icon: <FaSearch className="text-purple-400 text-4xl mb-4" />, title: "Too Many Options", desc: "Hundreds of courses, unclear which one fits your path or goals." }, 
-              { icon: <FaRegClock className="text-purple-400 text-4xl mb-4" />, title: "No Time for Advising", desc: "Academic advisors aren't always available when you need help." },
-              { icon: <FaQuestionCircle className="text-purple-400 text-4xl mb-4" />, title: "What Comes Next?", desc: "Confused about prerequisites, major requirements, or future semesters?" }].map((problem, idx) => (
-                <FadeInSection key={idx}>
-                  <div className="bg-gray-900 rounded-xl p-6 shadow hover:ring-2 hover:ring-purple-500 transition-all h-full">
-                    {problem.icon}
-                    <h3 className="text-xl font-semibold text-white mb-2">{problem.title}</h3>
-                    <p className="text-gray-400">{problem.desc}</p>
-                  </div>
-                </FadeInSection>
-              ))}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            {[
+              {
+                icon: <FaSearch className="text-purple-400 text-4xl mb-4" />,
+                title: "Too Many Options",
+                desc: "Hundreds of courses, unclear which one fits your path or goals.",
+              },
+              {
+                icon: <FaRegClock className="text-purple-400 text-4xl mb-4" />,
+                title: "No Time for Advising",
+                desc: "Academic advisors aren't always available when you need help.",
+              },
+              {
+                icon: <FaQuestionCircle className="text-purple-400 text-4xl mb-4" />,
+                title: "What Comes Next?",
+                desc: "Confused about prerequisites, major requirements, or future semesters?",
+              },
+            ].map((problem, idx) => (
+              <FadeInSection key={idx}>
+                <div className="bg-gray-900 rounded-xl p-6 shadow hover:ring-2 hover:ring-purple-500 transition-all h-full">
+                  {problem.icon}
+                  <h3 className="text-lg font-semibold text-white mb-2">{problem.title}</h3>
+                  <p className="text-gray-400">{problem.desc}</p>
+                </div>
+              </FadeInSection>
+            ))}
           </div>
         </div>
       </section>
 
       {/* HOW IT WORKS SECTION */}
-        <section className="py-20 px-6 bg-gray-900" id='how-it-works'>
-        <h2 className="text-4xl font-bold mb-4 text-purple-500 text-center">How It Works</h2>
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-8 items-start">
-            <div className="flex-1 space-y-6">
+      <section className="py-20 px-4 sm:px-6 bg-gray-900" id="how-it-works">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-purple-500 text-center">How It Works</h2>
+        <div className="max-w-6xl mx-auto flex flex-col-reverse md:flex-row gap-10 items-center">
+          {/* Text Steps */}
+          <div className="flex-1 space-y-6 w-full">
             {[
-                {
+              {
                 title: '1. Create an Account',
                 desc: 'Sign up quickly using your email to get started.',
-                },
-                {
+              },
+              {
                 title: '2. Ask Questions',
                 desc: 'Chat with our AI to get personalized course recommendations.',
-                },
-                {
+              },
+              {
                 title: '3. Plan with Confidence',
                 desc: 'Make informed decisions anytime, on your own.',
-                },
+              },
             ].map((step, idx) => (
-                <FadeInSection key={idx}>
+              <FadeInSection key={idx}>
                 <div className="bg-gray-800 p-6 rounded-xl shadow-lg hover:ring-2 hover:ring-purple-500 transition-all duration-200">
-                    <h3 className="text-xl font-semibold mb-2 text-purple-400">{step.title}</h3>
-                    <p className="text-gray-300">{step.desc}</p>
+                  <h3 className="text-lg sm:text-xl font-semibold mb-2 text-purple-400">{step.title}</h3>
+                  <p className="text-gray-300">{step.desc}</p>
                 </div>
-                </FadeInSection>
+              </FadeInSection>
             ))}
-            </div>
+          </div>
 
-            <div className="flex-1 w-full h-full flex items-center justify-center">
-            <div className="w-full h-[400px] bg-gray-800 border border-dashed border-gray-600 rounded-xl flex items-center justify-center text-gray-400">
-                Chat Demo GIF Placeholder
-            </div>
-            </div>
+          {/* Chat Demo */}
+          <div className="flex-1 w-full max-w-md sm:max-w-full h-64 sm:h-[400px] bg-gray-800 border border-dashed border-gray-600 rounded-xl flex items-center justify-center text-gray-400">
+            Chat Demo GIF Placeholder
+          </div>
         </div>
-        </section>
+      </section>
 
       {/* WHY USE COURSEREC SECTION */}
-      <section className="py-20 px-6 bg-gray-800 text-center" id="why-use-course-rec">
-        <h2 className="text-4xl font-bold mb-4 text-purple-500">Why Use CourseRec<span className="text-white">.</span></h2>
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto text-left">
+      <section className="py-20 px-4 sm:px-6 bg-gray-800 text-center" id="why-use-course-rec">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-purple-500">
+          Why Use CourseRec<span className="text-white">.</span>
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto text-left">
           {features.map((item, idx) => (
             <FadeInSection key={idx}>
               <div className="bg-gray-900 p-6 rounded-xl shadow hover:ring-2 hover:ring-purple-500 transition-all duration-300">
                 <div className="text-3xl mb-4">{item.icon}</div>
-                <h3 className="text-xl font-semibold text-purple-400 mb-2">{item.title}</h3>
+                <h3 className="text-lg sm:text-xl font-semibold text-purple-400 mb-2">{item.title}</h3>
                 <p className="text-gray-300">{item.desc}</p>
               </div>
             </FadeInSection>
@@ -164,16 +187,17 @@ export default function LandingPage() {
       </section>
 
       {/* SUPPORTED UNIVERSITIES SECTION */}
-      <section className="py-20 px-6 bg-gray-900 text-center">
-        <h2 className="text-4xl font-bold mb-4 text-purple-500">Currently Supports</h2>
+      <section className="py-20 px-4 sm:px-6 bg-gray-900 text-center">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-purple-500">Currently Supports</h2>
+       
         <div className="mb-6">
           <img
-            src={TrentUniversityLogo} // Update the path to the logo image
+            src={TrentUniversityLogo}
             alt="Trent University Logo"
-            className="mx-auto h-20 object-contain" // Adjust the size as needed
+            className="mx-auto h-16 sm:h-20 object-contain"
           />
         </div>
-        <p className="text-white text-lg mb-6">
+        <p className="text-white text-base sm:text-lg mb-4 sm:mb-6">
           🎓 Department of Computing & Information Systems, Trent University
         </p>
         <p className="text-purple-400 text-sm">More universities coming soon...</p>
