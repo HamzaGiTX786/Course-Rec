@@ -198,7 +198,7 @@ export default function LandingPage() {
           />
         </div>
         <p className="text-white text-base sm:text-lg mb-4 sm:mb-6">
-          🎓 Department of Computing & Information Systems, Trent University
+          Department of Computing & Information Systems, Trent University
         </p>
         <p className="text-purple-400 text-sm">More universities coming soon...</p>
       </section>
