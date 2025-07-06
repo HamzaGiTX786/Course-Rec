@@ -1,15 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import api from '../utils/axiosInstance';
 
-const validatePassword = (password) => {
-  const regex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&_])[A-Za-z\d@$!%*?#&_]{8,}$/;
-  return regex.test(password);
-};
+export default function Signup() {
+  const navigate = useNavigate();
 
-const Signup = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -18,59 +15,68 @@ const Signup = () => {
 
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState('');
-  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    setErrors((prev) => ({ ...prev, [e.target.name]: '' }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: '' });
     setServerError('');
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setErrors({});
-    setServerError('');
-
+  const validate = () => {
     const newErrors = {};
 
-    if (!formData.email.trim()) newErrors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(formData.email))
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
+    }
 
-    if (!formData.password) newErrors.password = 'Password is required';
-    else if (!validatePassword(formData.password))
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+    } else if (
+      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&])[A-Za-z\d@$!%*?#&]{8,}$/.test(formData.password)
+    ) {
       newErrors.password =
-        'Password must be at least 8 characters, include uppercase, lowercase, number, and symbol';
+        'Password must be at least 8 characters and include uppercase, lowercase, number, and special character.';
+    }
 
-    if (formData.password !== formData.confirmPassword)
+    if (formData.confirmPassword !== formData.password) {
       newErrors.confirmPassword = 'Passwords do not match';
+    }
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
+    return newErrors;
+  };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    const validationErrors = validate();
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
 
     try {
-      await api.post('/users/signup', {
+      await api.post('/users/register', {
         email: formData.email,
         password: formData.password,
       });
 
       navigate('/login');
     } catch (err) {
-      if (err.response?.data?.message?.toLowerCase().includes('email')) {
-        setErrors((prev) => ({
-          ...prev,
-          email: 'This email is already registered',
-        }));
+      if (err.response?.data?.message?.includes('already')) {
+        setServerError('Email already exists');
       } else {
-        setServerError('Signup failed. Please try again later.');
+        setServerError('Something went wrong. Please try again.');
       }
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col">
+      {/* Logo */}
       <div className="px-6 py-6">
         <a href="/" className="text-3xl font-bold text-purple-500 font-poppins">
           CourseRec<span className="text-white">.</span>
@@ -85,14 +91,15 @@ const Signup = () => {
           className="bg-gray-800 p-8 sm:p-10 rounded-2xl shadow-2xl max-w-md w-full"
         >
           <h2 className="text-3xl font-bold text-white mb-6 text-center">
-            Create an Account
+            Sign Up for CourseRec
           </h2>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSignup} className="space-y-5">
+            {/* Email */}
             <div>
               <input
-                name="email"
                 type="email"
+                name="email"
                 placeholder="Email"
                 value={formData.email}
                 onChange={handleChange}
@@ -107,10 +114,11 @@ const Signup = () => {
               )}
             </div>
 
-            <div>
+            {/* Password */}
+            <div className="relative">
               <input
+                type={showPassword ? 'text' : 'password'}
                 name="password"
-                type="password"
                 placeholder="Password"
                 value={formData.password}
                 onChange={handleChange}
@@ -118,17 +126,26 @@ const Signup = () => {
                   errors.password
                     ? 'border border-red-500 focus:ring-red-500'
                     : 'focus:ring-purple-500'
-                }`}
+                } pr-10`}
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-purple-500 cursor-pointer"
+                tabIndex={-1}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
               {errors.password && (
                 <p className="text-red-500 text-sm mt-1">{errors.password}</p>
               )}
             </div>
 
-            <div>
+            {/* Confirm Password */}
+            <div className="relative">
               <input
+                type={showConfirmPassword ? 'text' : 'password'}
                 name="confirmPassword"
-                type="password"
                 placeholder="Confirm Password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
@@ -136,15 +153,22 @@ const Signup = () => {
                   errors.confirmPassword
                     ? 'border border-red-500 focus:ring-red-500'
                     : 'focus:ring-purple-500'
-                }`}
+                } pr-10`}
               />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword((prev) => !prev)}
+                className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-purple-500 cursor-pointer"
+                tabIndex={-1}
+              >
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
               {errors.confirmPassword && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.confirmPassword}
-                </p>
+                <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>
               )}
             </div>
 
+            {/* Server error */}
             {serverError && (
               <p className="text-red-500 text-sm text-center">{serverError}</p>
             )}
@@ -157,11 +181,12 @@ const Signup = () => {
             </button>
           </form>
 
+          {/* Footer links */}
           <div className="mt-6 text-sm text-center text-gray-400 space-y-3">
             <p>
               Already have an account?
               <a href="/login" className="text-purple-500 hover:text-purple-400 ml-1">
-                Log in
+                Login
               </a>
             </p>
             <p>
@@ -177,6 +202,4 @@ const Signup = () => {
       </div>
     </div>
   );
-};
-
-export default Signup;
+}

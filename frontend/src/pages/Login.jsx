@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '../utils/AuthProvider';
 import api from '../utils/axiosInstance';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { setAccessToken } = useAuth();
 
@@ -77,7 +79,7 @@ export default function Login() {
           className="bg-gray-800 p-8 sm:p-10 rounded-2xl shadow-2xl max-w-md w-full"
         >
           <h2 className="text-3xl font-bold text-white mb-6 text-center">
-            Log in to <span className='text-purple-500'>CourseRec<span className="text-white">.</span></span>
+            Log in to CourseRec
           </h2>
 
           <form onSubmit={handleLogin} className="space-y-5">
@@ -99,9 +101,9 @@ export default function Login() {
               )}
             </div>
 
-            <div>
+            <div className="relative">
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 name="password"
                 placeholder="Password"
                 value={formData.password}
@@ -110,8 +112,16 @@ export default function Login() {
                   errors.password
                     ? 'border border-red-500 focus:ring-red-500'
                     : 'focus:ring-purple-500'
-                }`}
+                } pr-10`}
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-purple-500 focus:outline-none cursor-pointer"
+                tabIndex={-1}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
               {errors.password && (
                 <p className="text-red-500 text-sm mt-1">{errors.password}</p>
               )}
