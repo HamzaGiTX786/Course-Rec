@@ -59,12 +59,13 @@ export default function Signup() {
     }
 
     try {
-      await api.post('/users/register', {
+      await api.post('/users/create/', {
         email: formData.email,
         password: formData.password,
+        is_superuser: false,
       });
 
-      navigate('/login');
+      navigate('/dashboard');
     } catch (err) {
       if (err.response?.data?.message?.includes('already')) {
         setServerError('Email already exists');

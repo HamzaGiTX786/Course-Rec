@@ -3,13 +3,18 @@ import { motion } from 'framer-motion';
 import { FaPaperPlane } from 'react-icons/fa';
 import ChatSidebar from '../components/ChatSidebar';
 
-import api from '../utils/axiosInstance';
+import useAxiosAuth from '../utils/useAxiosAuth'; 
 
 export default function Dashboard() {
+
+  const api = useAxiosAuth();
+
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([
     { sender: 'bot', text: "Hi! I'm CourseRec. Ask me about your courses."}
   ]);
+  const [error, setError] = useState(null);
+  let res;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,10 +24,26 @@ export default function Dashboard() {
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
 
-    // fake response - replace with actual API call
-    const botResponse = { sender: 'bot', text: `You asked: "${userMessage.text}"` };
+    try{
+    const response = await api.post('/recommend/prompt/', 
+      { 
+        prompt: input 
+      }
+    );
+     res = response.data;
+  } catch (error) {
+    console.error('Error sending message:', error);
+    }
+
+    if(res.status !== 200) {
+    console.error('Error while sending message', res.message);
+    setError('Failed to send message. Please try again.');
+    return;
+  }
+
+   const botResponse = { sender: 'bot', text: `${res.data.message}`};
     setTimeout(() => setMessages((prev) => [...prev, botResponse]), 500);
-  };
+}
 
   return (
     <div className="flex min-h-screen bg-gray-900 text-white">

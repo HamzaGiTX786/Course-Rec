@@ -45,7 +45,7 @@ export default function Login() {
 
     try {
       const response = await api.post(
-        '/users/login',
+        '/users/login/',
         {
           email: formData.email,
           password: formData.password,
@@ -55,7 +55,7 @@ export default function Login() {
         }
       );
 
-      setAccessToken(response.data.accessToken);
+      setAccessToken(response.data.access_token);
       navigate('/dashboard');
     } catch (err) {
       setServerError('Invalid email or password');

@@ -5,8 +5,30 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [accessToken, setAccessToken] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  // Refresh once on mount
   useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const res = await axios.get('/users/refresh/', {
+          withCredentials: true, // This sends the refresh token cookie
+        });
+        setAccessToken(res.data.access_token);
+      } catch (err) {
+        console.error('Initial token refresh failed:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchToken();
+  }, []);
+
+  // Refresh token periodically
+  useEffect(() => {
+    if (!accessToken) return;
+
     const interval = setInterval(async () => {
       try {
         const res = await axios.get('/users/refresh/', {
@@ -17,7 +39,7 @@ export function AuthProvider({ children }) {
         });
         setAccessToken(res.data.access_token);
       } catch (err) {
-        console.error('Refresh failed:', err);
+        console.error('Periodic refresh failed:', err);
         setAccessToken(null);
       }
     }, 4.5 * 60 * 1000); // every 4.5 minutes
@@ -27,7 +49,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={{ accessToken, setAccessToken }}>
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 }

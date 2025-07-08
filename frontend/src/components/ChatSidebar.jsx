@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FiSearch, FiEdit2, FiCheck } from 'react-icons/fi';
 
-
-import api from '../utils/axiosInstance';
+import useAxiosAuth from '../utils/useAxiosAuth'; 
 
 export default function ChatSidebar() {
   const [conversations, setConversations] = useState([]);
@@ -10,11 +9,15 @@ export default function ChatSidebar() {
   const [editingId, setEditingId] = useState(null);
   const [editedName, setEditedName] = useState('');
 
+  const api = useAxiosAuth();
+
+  // Fetch conversations when the component mounts
   useEffect(() => {
     const fetchConversations = async () => {
       try {
         const res = await api.get('/users/all-conversations/');
-        setConversations(res.data);
+        console.log('Fetched conversations:', res.data.data);
+        setConversations(res.data.data);
       } catch (error) {
         console.error('Failed to fetch conversations:', error);
       }
@@ -25,12 +28,12 @@ export default function ChatSidebar() {
 
   const handleRename = async (id) => {
     try {
-      await api.post(`/users/rename-conversations/`, 
+      await api.post(`/users/rename-conversation/`, 
         { new_name: editedName,
           conversation_id: id
          });
       setConversations(prev =>
-        prev.map(conv => (conv.id === id ? { ...conv, name: editedName } : conv))
+        prev.map(conv => (conv.conversation_id === id ? { ...conv, title: editedName } : conv))
       );
       setEditingId(null);
       setEditedName('');
@@ -40,8 +43,9 @@ export default function ChatSidebar() {
   };
 
   const filteredConversations = conversations.filter(conv =>
-    conv.conversationName.toLowerCase().includes(searchTerm.toLowerCase())
+    conv.title?.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
 
   return (
     <div className="w-72 bg-gray-800 p-4 border-r border-gray-700">
@@ -61,30 +65,30 @@ export default function ChatSidebar() {
       <div className="space-y-2 overflow-y-auto max-h-[calc(100vh-120px)]">
         {filteredConversations.map((conv) => (
           <div
-            key={conv.conversationid}
+            key={conv.conversation_id}
             className="bg-gray-700 hover:bg-gray-600 p-3 rounded-lg flex justify-between items-center"
           >
-            {editingId === conv.conversationid ? (
+            {editingId === conv.conversation_id ? (
               <>
                 <input
                   value={editedName}
                   onChange={(e) => setEditedName(e.target.value)}
                   className="bg-gray-600 p-1 rounded text-white flex-1 mr-2"
                 />
-                <button onClick={() => handleRename(conv.conversationid)}>
-                  <FiCheck className="text-green-400" />
+                <button onClick={() => handleRename(conv.conversation_id)}>
+                  <FiCheck className="text-green-400 cursor-pointer" />
                 </button>
               </>
             ) : (
               <>
-                <span className="text-white truncate">{conv.name}</span>
+                <span className="text-white truncate">{conv.title}</span>
                 <button
                   onClick={() => {
-                    setEditingId(conv.id);
-                    setEditedName(conv.name);
+                    setEditingId(conv.conversation_id);
+                    setEditedName(conv.title);
                   }}
                 >
-                  <FiEdit2 className="text-purple-400 ml-2" />
+                  <FiEdit2 className="text-purple-400 ml-2 cursor-pointer" />
                 </button>
               </>
             )}

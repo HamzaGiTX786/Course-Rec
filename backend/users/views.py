@@ -27,16 +27,11 @@ def get_creds(request):
 @permission_classes([AllowAny])
 def refresh(request):
     """
-    Handle token refreshing.
+    Handle token refreshing using refresh token stored in secure HTTP-only cookie.
     """
-    refresh_token = request.headers.get('Authorization')
+    refresh_token = request.COOKIES.get('refresh_token')
     if not refresh_token:
-        return Response({'error': 'Refresh token is required in the Authorization header'}, 
-        status=status.HTTP_400_BAD_REQUEST)
-
-    # Remove "Bearer " prefix if present
-    if refresh_token.startswith("Bearer "):
-        refresh_token = refresh_token[7:]  # Strip out "Bearer "
+        return Response({'error': 'Refresh token is missing in cookie'}, status=status.HTTP_400_BAD_REQUEST)
 
     try:
         refresh = RefreshToken(refresh_token)
@@ -44,11 +39,10 @@ def refresh(request):
 
         return Response({
             'access_token': str(new_access_token),
-            }, status=status.HTTP_200_OK)
+        }, status=status.HTTP_200_OK)
 
     except Exception as e:
-        return Response({'error': 'Invalid refresh token', 'details': str(e)}, 
-        status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'Invalid refresh token', 'details': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 # Endpoint to fetch all users (admin use case, for example)
 @api_view(['GET'])
