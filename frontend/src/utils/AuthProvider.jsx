@@ -12,7 +12,7 @@ export function AuthProvider({ children }) {
     const fetchToken = async () => {
       try {
         const res = await axios.get('/users/refresh/', {
-          withCredentials: true, // This sends the refresh token cookie
+          withCredentials: true,
         });
         setAccessToken(res.data.access_token);
       } catch (err) {
@@ -47,8 +47,16 @@ export function AuthProvider({ children }) {
     return () => clearInterval(interval);
   }, [accessToken]);
 
+  const logout = () => {
+    setAccessToken(null);
+    // Tell the backend to clear the refresh token cookie:
+    axios.post('/users/logout/', {}, { withCredentials: true }).catch((err) => {
+      console.error('Logout request failed', err);
+    });
+  };
+
   return (
-    <AuthContext.Provider value={{ accessToken, setAccessToken }}>
+    <AuthContext.Provider value={{ accessToken, setAccessToken, logout }}>
       {!loading && children}
     </AuthContext.Provider>
   );

@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
-import api from './axiosInstance'; // your custom axios instance
+import api from './axiosInstance';
 import { useAuth } from './AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 export default function useAxiosAuth() {
-  const { accessToken, setAccessToken } = useAuth();
+  const { accessToken, setAccessToken, logout } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const requestInterceptor = api.interceptors.request.use(
@@ -26,6 +28,7 @@ export default function useAxiosAuth() {
           !originalRequest._retry
         ) {
           originalRequest._retry = true;
+
           try {
             const res = await api.get('/users/refresh/', {
               withCredentials: true,
@@ -38,6 +41,8 @@ export default function useAxiosAuth() {
             return api(originalRequest);
           } catch (refreshErr) {
             console.error('Token refresh failed after 401', refreshErr);
+            logout(); // clears state and sends logout request
+            navigate('/login');
             return Promise.reject(refreshErr);
           }
         }
@@ -50,7 +55,7 @@ export default function useAxiosAuth() {
       api.interceptors.request.eject(requestInterceptor);
       api.interceptors.response.eject(responseInterceptor);
     };
-  }, [accessToken, setAccessToken]);
+  }, [accessToken, setAccessToken, logout, navigate]);
 
   return api;
 }

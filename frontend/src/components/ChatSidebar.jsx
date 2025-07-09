@@ -3,7 +3,7 @@ import { FiSearch, FiEdit2, FiCheck } from 'react-icons/fi';
 
 import useAxiosAuth from '../utils/useAxiosAuth'; 
 
-export default function ChatSidebar() {
+export default function ChatSidebar({ onSelectConversation, activeConversationId }) {
   const [conversations, setConversations] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [editingId, setEditingId] = useState(null);
@@ -47,8 +47,9 @@ export default function ChatSidebar() {
   );
 
 
-  return (
+ return (
     <div className="w-72 bg-gray-800 p-4 border-r border-gray-700">
+      {/* Search Bar */}
       <div className="mb-4">
         <div className="flex items-center bg-gray-700 rounded-lg px-3 py-2">
           <FiSearch className="text-gray-400 mr-2" />
@@ -62,38 +63,47 @@ export default function ChatSidebar() {
         </div>
       </div>
 
+      {/* Conversation List */}
       <div className="space-y-2 overflow-y-auto max-h-[calc(100vh-120px)]">
-        {filteredConversations.map((conv) => (
-          <div
-            key={conv.conversation_id}
-            className="bg-gray-700 hover:bg-gray-600 p-3 rounded-lg flex justify-between items-center"
-          >
-            {editingId === conv.conversation_id ? (
-              <>
-                <input
-                  value={editedName}
-                  onChange={(e) => setEditedName(e.target.value)}
-                  className="bg-gray-600 p-1 rounded text-white flex-1 mr-2"
-                />
-                <button onClick={() => handleRename(conv.conversation_id)}>
-                  <FiCheck className="text-green-400 cursor-pointer" />
-                </button>
-              </>
-            ) : (
-              <>
-                <span className="text-white truncate">{conv.title}</span>
-                <button
-                  onClick={() => {
-                    setEditingId(conv.conversation_id);
-                    setEditedName(conv.title);
-                  }}
-                >
-                  <FiEdit2 className="text-purple-400 ml-2 cursor-pointer" />
-                </button>
-              </>
-            )}
-          </div>
-        ))}
+        {filteredConversations.map((conv) => {
+          const isActive = conv.conversation_id === activeConversationId;
+
+          return (
+            <div
+              key={conv.conversation_id}
+              onClick={() => onSelectConversation(conv.conversation_id)}
+              className={`p-3 rounded-lg flex justify-between items-center cursor-pointer transition-colors duration-200
+                ${isActive ? 'border border-purple-500 bg-gray-700' : 'bg-gray-700 hover:bg-gray-600'}
+              `}
+            >
+              {editingId === conv.conversation_id ? (
+                <>
+                  <input
+                    value={editedName}
+                    onChange={(e) => setEditedName(e.target.value)}
+                    className="bg-gray-600 p-1 rounded text-white flex-1 mr-2"
+                  />
+                  <button onClick={() => handleRename(conv.conversation_id)}>
+                    <FiCheck className="text-green-400 cursor-pointer" />
+                  </button>
+                </>
+              ) : (
+                <>
+                  <span className="text-white truncate">{conv.title}</span>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setEditingId(conv.conversation_id);
+                      setEditedName(conv.title);
+                    }}
+                  >
+                    <FiEdit2 className="text-purple-400 ml-2 cursor-pointer" />
+                  </button>
+                </>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
