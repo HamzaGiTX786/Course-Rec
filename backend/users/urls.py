@@ -10,4 +10,5 @@ urlpatterns = [
     path('conversation/', views.get_conversations),
     path('all-conversations/', views.all_conversations),
     path('rename-conversation/', views.rename_conversation),
+    path('forgot-password/', views.forgot_password),
 ]

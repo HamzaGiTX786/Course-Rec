@@ -181,3 +181,12 @@ SIMPLE_JWT = {
 
 SECURE_COOKIE = False
 OPENAI_API_KEY=os.getenv('OPENAI_API_KEY')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # or your SMTP provider
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'your_email@example.com'
+EMAIL_HOST_PASSWORD = 'your_app_password_or_smtp_password'
+
+DEFAULT_FROM_EMAIL = 'CourseRec Support <your_email@example.com>'

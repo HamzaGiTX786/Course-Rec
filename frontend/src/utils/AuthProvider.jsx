@@ -48,11 +48,16 @@ export function AuthProvider({ children }) {
   }, [accessToken]);
 
   const logout = () => {
-    setAccessToken(null);
-    // Tell the backend to clear the refresh token cookie:
-    axios.post('/users/logout/', {}, { withCredentials: true }).catch((err) => {
+    axios.get('http://localhost:8000/users/logout/', 
+      { withCredentials: true,
+       headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }).catch((err) => {
       console.error('Logout request failed', err);
     });
+
+    setAccessToken(null);
   };
 
   return (

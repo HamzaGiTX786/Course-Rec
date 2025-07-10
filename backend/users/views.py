@@ -1,17 +1,20 @@
 import os
 import json
+
 from django.utils import timezone
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.core.mail import send_mail
+from django.conf import settings
+
 from rest_framework.response import Response 
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 
-
 from django.conf import settings
-from .models import User, Conversation
+from .models import User, Conversation, ForgotPassword
 from .serializers import UserRegistrationSerializer
 
 def get_creds(request):
@@ -191,3 +194,31 @@ def rename_conversation(request):
         return Response({'message': 'Conversation renamed successfully'}, status=status.HTTP_200_OK)
     except Conversation.DoesNotExist:
         return Response({'message': 'Conversation not found'}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST'])
+def forgot_password(request):
+    email = request.data.get('email')
+    if not email:
+        return Response({'message': 'Email is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        user = User.objects.get(email=email)
+        forgot = ForgotPassword.objects.create(user=user)
+        forgot.save()
+
+        # Send the email with the token
+        send_mail(
+            subject='Your CourseRec Password Reset Code',
+            message=f'Hello there,\n\nYour password reset code is: {forgot.token}\n\nIf you did not request this, please ignore this email.',
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[user.email],
+            fail_silently=False,
+        )
+
+    except User.DoesNotExist:
+        return Response({'message': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'message': f'Error sending reset email: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    return Response({'message': 'Password reset code sent to your email'}, status=status.HTTP_200_OK)
+    

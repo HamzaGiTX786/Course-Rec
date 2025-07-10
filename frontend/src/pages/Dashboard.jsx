@@ -1,12 +1,18 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaPaperPlane } from 'react-icons/fa';
 import ChatSidebar from '../components/ChatSidebar';
 
-import useAxiosAuth from '../utils/useAxiosAuth'; 
+import useAxiosAuth from '../utils/useAxiosAuth';
+import { useAuth } from '../utils/AuthProvider'; 
 
 export default function Dashboard() {
+
+  const navigate = useNavigate();
+
   const api = useAxiosAuth();
+  const { logout } = useAuth();
 
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
@@ -14,7 +20,12 @@ export default function Dashboard() {
   const [activeConversationId, setActiveConversationId] = useState(null);
   const [isTyping, setIsTyping] = useState(false);
 
-const handleSubmit = async (e) => {
+  const handleLogout = () => {
+    logout();
+    navigate('/login'); // Redirect to login page after logout
+  };
+
+  const handleSubmit = async (e) => {
   e.preventDefault();
   if (!input.trim()) return;
 
@@ -90,6 +101,18 @@ const handleSubmit = async (e) => {
         activeConversationId={activeConversationId}
       />
       <div className="flex-1 flex flex-col p-4">
+        {/* Add a header with logout button */}
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-2xl font-bold">Dashboard</h1>
+          <button
+            onClick={handleLogout}
+            className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg transition-colors cursor-pointer"
+            type="button"
+          >
+            Logout
+          </button>
+        </div>
+
         <motion.div 
           initial={{ opacity: 0, y: -10 }} 
           animate={{ opacity: 1, y: 0 }} 
@@ -108,7 +131,6 @@ const handleSubmit = async (e) => {
             </motion.div>
           ))}
 
-          {/* Typing indicator OUTSIDE the map */}
           {isTyping && (
             <motion.div 
               initial={{ opacity: 0 }} 
