@@ -1,23 +1,29 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { FaPaperPlane } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaPaperPlane, FaChevronRight } from 'react-icons/fa';
 import ChatSidebar from '../components/ChatSidebar';
-
 import useAxiosAuth from '../utils/useAxiosAuth';
-import { useAuth } from '../utils/AuthProvider'; 
+import { useAuth } from '../utils/AuthProvider';
+import { useMediaQuery } from 'react-responsive';
 
 export default function Dashboard() {
   const navigate = useNavigate();
   const api = useAxiosAuth();
   const { logout } = useAuth();
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState(null);
   const [activeConversationId, setActiveConversationId] = useState(null);
   const [isTyping, setIsTyping] = useState(false);
-  const [conversations, setConversations] = useState([]); // Store conversations here
+  const [conversations, setConversations] = useState([]);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+  const closeSidebar = () => setSidebarOpen(false);
 
   const handleLogout = () => {
     logout();
@@ -25,11 +31,14 @@ export default function Dashboard() {
   };
 
   const fetchConversations = async () => {
+    setIsLoading(true);
     try {
       const res = await api.get('/users/all-conversations/');
-      setConversations(res.data.data); // Update conversations list from backend
+      setConversations(res.data.data);
     } catch (error) {
       console.error('Failed to fetch conversations:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -62,10 +71,9 @@ export default function Dashboard() {
         return;
       }
 
-      // Update conversation ID if it was just created
       if (!activeConversationId && conversation_id) {
         setActiveConversationId(conversation_id);
-        fetchConversations(); // Update the conversation list after a new one is created
+        fetchConversations();
       }
 
       const botResponse = { sender: 'bot', text: data };
@@ -80,44 +88,88 @@ export default function Dashboard() {
 
   const handleConversationSelect = async (conversationId) => {
     if (conversationId) {
-    try {
-      setActiveConversationId(conversationId);
+      try {
+        setActiveConversationId(conversationId);
+        if (isMobile) closeSidebar();
 
-      const response = await api.post('/users/conversation/', {
-        conversation_id: conversationId
-      });
+        const response = await api.post('/users/conversation/', {
+          conversation_id: conversationId
+        });
 
-      const conversationData = response.data.data;
+        const conversationData = response.data.data;
 
-      const convMessages = conversationData.flatMap((entry) => ([
-        { sender: 'user', text: entry.prompt },
-        { sender: 'bot', text: entry.completion }
-      ]));
+        const convMessages = conversationData.flatMap((entry) => ([
+          { sender: 'user', text: entry.prompt },
+          { sender: 'bot', text: entry.completion }
+        ]));
 
-      setMessages(convMessages);
-    } 
-     catch (error) {
-      console.error('Failed to load conversation messages:', error);
-      setMessages([{ sender: 'bot', text: "Failed to load conversation. Try again." }]);
-    }
-  }else{
+        setMessages(convMessages);
+      } catch (error) {
+        console.error('Failed to load conversation messages:', error);
+        setMessages([{ sender: 'bot', text: "Failed to load conversation. Try again." }]);
+      }
+    } else {
       setActiveConversationId(null);
-      setMessages([]); // Clear messages if no conversation is selected
+      setMessages([]);
     }
   };
 
   useEffect(() => {
-    fetchConversations(); // Fetch conversations when the component mounts
+    fetchConversations();
   }, []);
 
   return (
-    <div className="flex min-h-screen bg-gray-900 text-white">
-      <ChatSidebar 
-        onSelectConversation={handleConversationSelect}
-        activeConversationId={activeConversationId}
-        conversations={conversations}  // Pass conversations to the sidebar
-        setConversations={setConversations} // Provide method to update the list of conversations
-      />
+    <div className="flex min-h-screen bg-gray-900 text-white relative">
+      {/* Mobile Sidebar Toggle Button */}
+      {isMobile && (
+        <button
+          onClick={toggleSidebar}
+          className={`fixed left-0 top-1/2 transform -translate-y-1/2 z-20 bg-gray-800 p-2 rounded-r-lg shadow-lg transition-all duration-300 ${
+            sidebarOpen ? 'ml-72' : 'ml-0'
+          }`}
+          aria-label="Toggle sidebar"
+        >
+          <FaChevronRight
+            className={`text-purple-400 transition-transform duration-300 ${
+              sidebarOpen ? 'rotate-180' : ''
+            }`}
+          />
+        </button>
+      )}
+
+      {/* Sidebar */}
+      <AnimatePresence>
+        {(!isMobile || sidebarOpen) && (
+          <>
+            {isMobile && sidebarOpen && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.5 }}
+                exit={{ opacity: 0 }}
+                onClick={closeSidebar}
+                className="fixed inset-0 bg-black z-10"
+              />
+            )}
+            <motion.div
+              initial={isMobile ? { x: -300 } : { x: 0 }}
+              animate={isMobile ? { x: sidebarOpen ? 0 : -300 } : { x: 0 }}
+              exit={isMobile ? { x: -300 } : {}}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              className={`${isMobile ? 'fixed inset-y-0 left-0 z-20' : 'relative'} w-72`}
+            >
+              <ChatSidebar
+                onSelectConversation={handleConversationSelect}
+                activeConversationId={activeConversationId}
+                conversations={conversations}
+                setConversations={setConversations}
+                isLoading={isLoading}
+              />
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Main Content */}
       <div className="flex-1 flex flex-col p-4">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">Dashboard</h1>
@@ -143,7 +195,9 @@ export default function Dashboard() {
               className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               <div
-                className={`p-3 rounded-xl max-w-lg ${msg.sender === 'user' ? 'bg-purple-600' : 'bg-gray-700'}`}
+                className={`p-3 rounded-xl max-w-[90%] md:max-w-lg break-words ${
+                  msg.sender === 'user' ? 'bg-purple-600' : 'bg-gray-700'
+                }`}
               >
                 {msg.text}
               </div>
@@ -163,7 +217,7 @@ export default function Dashboard() {
           )}
         </motion.div>
 
-        <form onSubmit={handleSubmit} className="flex gap-2">
+        <form onSubmit={handleSubmit} className="flex gap-2 pb-4 md:pb-0">
           <input
             type="text"
             value={input}

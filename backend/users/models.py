@@ -98,7 +98,7 @@ class ForgotPassword(models.Model):
                 return token
 
 class Conversation(models.Model):
-    userid = models.ForeignKey(User, on_delete=models.CASCADE, null=False, default=1)
+    userid = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     conversationid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     filePath = models.CharField(max_length=255)
     conversationName = models.CharField(max_length=255, blank=True)

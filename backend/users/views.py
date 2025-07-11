@@ -195,6 +195,8 @@ def rename_conversation(request):
     except Conversation.DoesNotExist:
         return Response({'message': 'Conversation not found'}, status=status.HTTP_404_NOT_FOUND)
 
+# TODO: 1. Implement endpoint to verify forgot password token
+#. 2. Implement the email config to send the token to the user
 @api_view(['POST'])
 def forgot_password(request):
     email = request.data.get('email')

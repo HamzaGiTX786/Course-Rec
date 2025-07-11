@@ -102,20 +102,20 @@ export default function LandingPage() {
             </p>
           </FadeInSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 text-left">
             {[
               {
-                icon: <FaSearch className="text-purple-400 text-4xl mb-4" />,
+                icon: <FaSearch className="text-white text-4xl mb-4" />,
                 title: "Too Many Options",
                 desc: "Hundreds of courses, unclear which one fits your path or goals.",
               },
               {
-                icon: <FaRegClock className="text-purple-400 text-4xl mb-4" />,
+                icon: <FaRegClock className="text-white text-4xl mb-4" />,
                 title: "No Time for Advising",
                 desc: "Academic advisors aren't always available when you need help.",
               },
               {
-                icon: <FaQuestionCircle className="text-purple-400 text-4xl mb-4" />,
+                icon: <FaQuestionCircle className="text-white text-4xl mb-4" />,
                 title: "What Comes Next?",
                 desc: "Confused about prerequisites, major requirements, or future semesters?",
               },
@@ -123,7 +123,7 @@ export default function LandingPage() {
               <FadeInSection key={idx}>
                 <div className="bg-gray-900 rounded-xl p-6 shadow hover:ring-2 hover:ring-purple-500 transition-all h-full">
                   {problem.icon}
-                  <h3 className="text-lg font-semibold text-white mb-2">{problem.title}</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold text-purple-400 mb-2">{problem.title}</h3>
                   <p className="text-gray-400">{problem.desc}</p>
                 </div>
               </FadeInSection>
