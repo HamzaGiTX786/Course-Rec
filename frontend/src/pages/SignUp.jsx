@@ -176,7 +176,7 @@ export default function Signup() {
 
             <button
               type="submit"
-              className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition-colors"
+              className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition-colors cursor-pointer"
             >
               Sign Up
             </button>
@@ -186,14 +186,14 @@ export default function Signup() {
           <div className="mt-6 text-sm text-center text-gray-400 space-y-3">
             <p>
               Already have an account?
-              <a href="/login" className="text-purple-500 hover:text-purple-400 ml-1">
+              <a href="/login" className="text-purple-500 hover:text-purple-400 ml-1 cursor-pointer">
                 Login
               </a>
             </p>
             <p>
-              <a href="/terms" className="text-purple-500 hover:text-purple-400">Terms</a>
+              <a href="/terms" className="text-purple-500 hover:text-purple-400 cursor-pointer">Terms</a>
               {' '}|{' '}
-              <a href="/privacy" className="text-purple-500 hover:text-purple-400">Privacy</a>
+              <a href="/privacy" className="text-purple-500 hover:text-purple-400 cursor-pointer">Privacy</a>
             </p>
             <p className="text-xs text-gray-500 pt-2">
               &copy; {new Date().getFullYear()} CourseRec. All rights reserved.

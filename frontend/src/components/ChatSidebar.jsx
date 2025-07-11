@@ -1,39 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FiSearch, FiEdit2, FiCheck } from 'react-icons/fi';
+import { RiStickyNoteAddLine } from "react-icons/ri";
 
-import useAxiosAuth from '../utils/useAxiosAuth'; 
+import useAxiosAuth from '../utils/useAxiosAuth';
 
-export default function ChatSidebar({ onSelectConversation, activeConversationId }) {
-  const [conversations, setConversations] = useState([]);
+export default function ChatSidebar({ onSelectConversation, activeConversationId, conversations, setConversations }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [editingId, setEditingId] = useState(null);
   const [editedName, setEditedName] = useState('');
 
   const api = useAxiosAuth();
 
-  // Fetch conversations when the component mounts
-  useEffect(() => {
-    const fetchConversations = async () => {
-      try {
-        const res = await api.get('/users/all-conversations/');
-        console.log('Fetched conversations:', res.data.data);
-        setConversations(res.data.data);
-      } catch (error) {
-        console.error('Failed to fetch conversations:', error);
-      }
-    };
+  const handleCreateNewConversation = async () => {
+    onSelectConversation(null); // Reset active conversation
+  };
 
-    fetchConversations();
-  }, []);
+  const filteredConversations = conversations.filter(
+    (conv) => conv.title && conv.title.trim() !== '' && conv.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const handleRename = async (id) => {
     try {
-      await api.post(`/users/rename-conversation/`, 
-        { new_name: editedName,
-          conversation_id: id
-         });
-      setConversations(prev =>
-        prev.map(conv => (conv.conversation_id === id ? { ...conv, title: editedName } : conv))
+      await api.post(`/users/rename-conversation/`, { new_name: editedName, conversation_id: id });
+      setConversations((prev) =>
+        prev.map((conv) => (conv.conversation_id === id ? { ...conv, title: editedName } : conv))
       );
       setEditingId(null);
       setEditedName('');
@@ -42,14 +32,18 @@ export default function ChatSidebar({ onSelectConversation, activeConversationId
     }
   };
 
-  const filteredConversations = conversations.filter(conv =>
-    conv.title?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-
- return (
+  return (
     <div className="w-72 bg-gray-800 p-4 border-r border-gray-700">
-      {/* Search Bar */}
+      <div className="mb-4">
+        <button
+          onClick={handleCreateNewConversation}
+          className="flex items-center bg-purple-600 hover:bg-purple-700 p-3 rounded-lg transition-colors text-white w-full cursor-pointer"
+        >
+          <RiStickyNoteAddLine  className="mr-2" />
+          New Conversation
+        </button>
+      </div>
+
       <div className="mb-4">
         <div className="flex items-center bg-gray-700 rounded-lg px-3 py-2">
           <FiSearch className="text-gray-400 mr-2" />
@@ -63,18 +57,15 @@ export default function ChatSidebar({ onSelectConversation, activeConversationId
         </div>
       </div>
 
-      {/* Conversation List */}
       <div className="space-y-2 overflow-y-auto max-h-[calc(100vh-120px)]">
         {filteredConversations.map((conv) => {
           const isActive = conv.conversation_id === activeConversationId;
-
           return (
             <div
               key={conv.conversation_id}
               onClick={() => onSelectConversation(conv.conversation_id)}
               className={`p-3 rounded-lg flex justify-between items-center cursor-pointer transition-colors duration-200
-                ${isActive ? 'border border-purple-500 bg-gray-700' : 'bg-gray-700 hover:bg-gray-600'}
-              `}
+                ${isActive ? 'border border-purple-500 bg-gray-700' : 'bg-gray-700 hover:bg-gray-600'}`}
             >
               {editingId === conv.conversation_id ? (
                 <>
