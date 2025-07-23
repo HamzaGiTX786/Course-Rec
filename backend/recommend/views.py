@@ -47,8 +47,32 @@ def recommend_courses(request):
                 conversation = conversations.get(conversationid=conversation_id) # Get the conversation by ID
     except ObjectDoesNotExist:
         return Response({"message": "Error retrieving conversation"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    # Handle file operations
+    if not created: # old conversation
+        filepath = conversation.filePath
+    else: # new conversation
+        filepath = str(user.id)+"_"+str(conversation.conversationid) # create the file with the user.id and conversation.conversationid
+        conversation.filePath = filepath
+        conversation.save()
+    
+    full_path = full_path = os.path.join(settings.BASE_DIR, "conversations", f"{filepath}.jsonl")
+    
+    history = []
+    if os.path.exists(full_path):
+        try:
+            with open(full_path, 'r') as f:
+                for line in f:
+                    record = json.loads(line.strip())
+                    history.append({"role": "user", "content": record["prompt"]})
+                    history.append({"role": "assistant", "content": record["completion"]})
+        except Exception as e:
+            return Response({"message": f"Error reading conversation history: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    history.append({"role": "user", "content": prompt})
 
-    response = testmodel(prompt).content # Get the answer of the prompt
+    # response = testmodel(history).content # Get the answer of the prompt
+    response = "This is a mock response"
 
     # Define file-writing logic
     def write_to_file(filepath, prompt, response):
@@ -63,14 +87,6 @@ def recommend_courses(request):
         except Exception as e:
             return str(e)
         return None
-
-    # Handle file operations
-    if not created: # old conversation
-        filepath = conversation.filePath
-    else: # new conversation
-        filepath = str(user.id)+"_"+str(conversation.conversationid) # create the file with the user.id and conversation.conversationid
-        conversation.filePath = filepath
-        conversation.save()
 
     error = write_to_file(filepath, prompt, response)
     if error:

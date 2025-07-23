@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { FiSearch, FiEdit2, FiCheck } from 'react-icons/fi';
+import { FiSearch, FiEdit2, FiCheck, FiTrash2 } from 'react-icons/fi';
 import { RiStickyNoteAddLine } from "react-icons/ri";
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import useAxiosAuth from '../utils/useAxiosAuth';
 
 export default function ChatSidebar({ 
@@ -14,6 +14,7 @@ export default function ChatSidebar({
   const [searchTerm, setSearchTerm] = useState('');
   const [editingId, setEditingId] = useState(null);
   const [editedName, setEditedName] = useState('');
+  const [deletingId, setDeletingId] = useState(null); // for animation/loading state
 
   const api = useAxiosAuth();
 
@@ -35,6 +36,18 @@ export default function ChatSidebar({
       setEditedName('');
     } catch (error) {
       console.error('Rename failed:', error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      setDeletingId(id);
+      await api.delete(`/users/delete-conversation/`, {data: {conversation_id: id}});
+      setConversations((prev) => prev.filter((conv) => conv.conversation_id !== id));
+    } catch (error) {
+      console.error('Delete failed:', error);
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -73,47 +86,65 @@ export default function ChatSidebar({
             {searchTerm ? 'No conversations found' : 'No conversations yet'}
           </div>
         ) : (
-          filteredConversations.map((conv) => {
-            const isActive = conv.conversation_id === activeConversationId;
-            return (
-              <motion.div
-                key={conv.conversation_id}
-                onClick={() => onSelectConversation(conv.conversation_id)}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                className={`p-3 rounded-lg flex justify-between items-center cursor-pointer transition-colors duration-200
-                  ${isActive ? 'border border-purple-500 bg-gray-700' : 'bg-gray-700 hover:bg-gray-600'}`}
-              >
-                {editingId === conv.conversation_id ? (
-                  <>
-                    <input
-                      value={editedName}
-                      onChange={(e) => setEditedName(e.target.value)}
-                      className="bg-gray-600 p-1 rounded text-white flex-1 mr-2"
-                      autoFocus
-                      onKeyDown={(e) => e.key === 'Enter' && handleRename(conv.conversation_id)}
-                    />
-                    <button onClick={() => handleRename(conv.conversation_id)}>
-                      <FiCheck className="text-green-400 cursor-pointer" />
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <span className="text-white truncate">{conv.title}</span>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setEditingId(conv.conversation_id);
-                        setEditedName(conv.title);
-                      }}
-                    >
-                      <FiEdit2 className="text-purple-400 ml-2 cursor-pointer" />
-                    </button>
-                  </>
-                )}
-              </motion.div>
-            );
-          })
+          <AnimatePresence>
+            {filteredConversations.map((conv) => {
+              const isActive = conv.conversation_id === activeConversationId;
+              return (
+                <motion.div
+                  key={conv.conversation_id}
+                  onClick={() => onSelectConversation(conv.conversation_id)}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 10 }}
+                  className={`p-3 rounded-lg flex justify-between items-center cursor-pointer transition-colors duration-200
+                    ${isActive ? 'border border-purple-500 bg-gray-700' : 'bg-gray-700 hover:bg-gray-600'}`}
+                >
+                  {editingId === conv.conversation_id ? (
+                    <>
+                      <input
+                        value={editedName}
+                        onChange={(e) => setEditedName(e.target.value)}
+                        className="bg-gray-600 p-1 rounded text-white flex-1 mr-2"
+                        autoFocus
+                        onKeyDown={(e) => e.key === 'Enter' && handleRename(conv.conversation_id)}
+                      />
+                      <button onClick={() => handleRename(conv.conversation_id)}>
+                        <FiCheck className="text-green-400 cursor-pointer" />
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-white truncate flex-1">{conv.title}</span>
+                      <div className="flex items-center space-x-2 ml-2">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setEditingId(conv.conversation_id);
+                            setEditedName(conv.title);
+                          }}
+                        >
+                          <FiEdit2 className="text-purple-400 cursor-pointer" />
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDelete(conv.conversation_id);
+                          }}
+                          disabled={deletingId === conv.conversation_id}
+                        >
+                          <FiTrash2
+                            className={`${
+                              deletingId === conv.conversation_id ? 'animate-pulse text-red-300' : 'text-red-400'
+                            } cursor-pointer`}
+                          />
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
         )}
       </div>
     </div>

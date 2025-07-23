@@ -11,4 +11,5 @@ urlpatterns = [
     path('all-conversations/', views.all_conversations),
     path('rename-conversation/', views.rename_conversation),
     path('forgot-password/', views.forgot_password),
+    path('delete-conversation/', views.delete_convservation)
 ]

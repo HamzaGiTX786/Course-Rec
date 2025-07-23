@@ -195,6 +195,31 @@ def rename_conversation(request):
     except Conversation.DoesNotExist:
         return Response({'message': 'Conversation not found'}, status=status.HTTP_404_NOT_FOUND)
 
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated]) 
+def delete_convservation(request):
+    """Delete the conversation using the conversation id for an authenticated user"""
+
+    user = request.user
+    data = request.data
+
+    conversation_id = data.get('conversation_id')
+
+    print(conversation_id)
+
+    if not conversation_id:
+        return Response({'message': 'Conversation ID is requried'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        coversation = Conversation.objects.get(userid_id =user.id, conversationid=conversation_id)
+        filepath = coversation.filePath
+        full_path = os.path.join(settings.BASE_DIR, "conversations", f"{filepath}.jsonl")
+        os.remove(full_path)
+        coversation.delete()
+        return Response({'message': 'Conversation has been deleted successfuly'}, status=status.HTTP_200_OK)
+    except Conversation.DoesNotExist:
+        return Response({'message': 'Conversation not found'}, status=status.HTTP_404_NOT_FOUND)
+
 # TODO: 1. Implement endpoint to verify forgot password token
 #. 2. Implement the email config to send the token to the user
 @api_view(['POST'])
