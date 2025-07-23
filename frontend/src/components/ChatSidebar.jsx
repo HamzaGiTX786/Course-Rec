@@ -44,6 +44,7 @@ export default function ChatSidebar({
       setDeletingId(id);
       await api.delete(`/users/delete-conversation/`, {data: {conversation_id: id}});
       setConversations((prev) => prev.filter((conv) => conv.conversation_id !== id));
+      onSelectConversation(null);
     } catch (error) {
       console.error('Delete failed:', error);
     } finally {
