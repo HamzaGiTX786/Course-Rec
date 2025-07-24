@@ -48,7 +48,7 @@ root/
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### ✅ Prerequisites
 
 * Python 3.8+
 * Node.js 14+
@@ -56,13 +56,17 @@ root/
 * pip
 * docker
 
-### `.env` file
+### 🔒 `.env` file
 Create a `.env` file in the `backend` directory as show in the [Project Structure](https://github.com/HamzaGiTX786/Course-Rec/tree/master?tab=readme-ov-file#-project-structure). Inside the `.env` file store your OPENAI API key as such
 ```
 OPENAI_API_KEY = ....
 ```
+### ⚙️ Fine-tune an OPENAI LLM Model
+1. This chatbot works using a fine-tuned LLM model. To fine tune your LLM model, use the `train.jsonl` and `val.jsonl` files in the `data` directory.
+2. To fine-tune your model, please refer to the [OPENAI API docs](https://platform.openai.com/docs/guides/supervised-fine-tuning)
+3. Replace the name of your fine-tuned model with `ft:gpt-4o-mini-2024-07-18:hamza::AwwppreQ` in the `backend/recommend/usemodel.py` file
 
----
+### 📦 Setting up the a Virtual Environment 
 
 1. Create a virtual environment and activate it:
 
@@ -75,6 +79,7 @@ source env/bin/activate  # On Windows: env\Scripts\activate
 ```bash
 pip install -r requirements.txt
 ```
+---
 
 ## 📊  MySQL Database Setup (via Docker)
 
