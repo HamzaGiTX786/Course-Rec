@@ -56,6 +56,12 @@ root/
 * pip
 * docker
 
+### `.env` file
+Create a `.env` file in the `backend` directory as show in the [Project Structure](##project-structure). Inside the `.env` file store your OPENAI API key as such
+```
+OPENAI_API_KEY = ....
+```
+
 ---
 
 1. Create a virtual environment and activate it:
