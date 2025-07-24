@@ -12,7 +12,7 @@ import Footer from '../components/Footer';
 
 import TrentUniversityLogo from '../assets/TrentU_logo.webp';
 import HeroGif from '../assets/Hero_Gif.gif' 
-import ChatNow from '../assets/Chat_Now_slowed.gif'
+import ChatNow from '../assets/Chat_Now.gif'
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
