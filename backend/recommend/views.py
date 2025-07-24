@@ -71,8 +71,8 @@ def recommend_courses(request):
     
     history.append({"role": "user", "content": prompt})
 
-    # response = testmodel(history).content # Get the answer of the prompt
-    response = "This is a mock response"
+    response = testmodel(history).content # Get the answer of the prompt
+    # response = "This is a mock response"
 
     # Define file-writing logic
     def write_to_file(filepath, prompt, response):

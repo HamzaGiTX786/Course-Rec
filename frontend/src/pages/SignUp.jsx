@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+
 import api from '../utils/axiosInstance';
+import { useAuth } from '../utils/AuthProvider';
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -17,6 +19,7 @@ export default function Signup() {
   const [serverError, setServerError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { setAccessToken } = useAuth();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -59,18 +62,20 @@ export default function Signup() {
     }
 
     try {
-      await api.post('/users/create/', {
+      const response = await api.post('/users/create/', {
         email: formData.email,
         password: formData.password,
         is_superuser: false,
       });
-
+      
+      setAccessToken(response.data.access_token);
       navigate('/dashboard');
     } catch (err) {
       if (err.response?.data?.message?.includes('already')) {
         setServerError('Email already exists');
       } else {
         setServerError('Something went wrong. Please try again.');
+        console.log(err);
       }
     }
   };

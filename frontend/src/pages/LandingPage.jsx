@@ -11,6 +11,8 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 import TrentUniversityLogo from '../assets/TrentU_logo.webp';
+import HeroGif from '../assets/Hero_Gif.gif' 
+import ChatNow from '../assets/Chat_Now_slowed.gif'
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -64,29 +66,35 @@ export default function LandingPage() {
     <div className="bg-gray-900 text-white">
       <Navbar />
 
-      {/* HERO SECTION */}
-      <section className="min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 text-center bg-gray-900">
+            {/* HERO SECTION */}
+      <section className="mb-50 bmin-h-screen flex flex-col justify-center items-center px-4 sm:px-6 text-center bg-gray-900">
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 text-purple-500"
+          className="text-4xl sm:text-5xl md:text-6xl font-bold mt-50 mb-4 text-purple-500 animate__animated animate__fadeIn"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.8 }}
         >
           CourseRec<span className="text-white">.</span>
         </motion.h1>
-        <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-xl sm:max-w-2xl">
+        <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-xl sm:max-w-2xl mb-8 animate__animated animate__fadeIn animate__delay-1s">
           Your AI-Powered Course Recommender — anytime, anywhere.
         </p>
 
         <a
           href="/signup"
-          className="mt-6 inline-block bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition-colors"
+          className="mt-6 inline-block bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
         >
           Get Started
           <FaArrowRight className="inline ml-2" />
         </a>
 
-        <div className="mt-10 w-full max-w-xs sm:max-w-sm h-52 bg-gray-800 rounded-xl border border-dashed border-gray-600 flex items-center justify-center text-gray-400">
-          Graphic Placeholder
+        <div className="relative mt-10 w-full max-w-4xl h-auto mx-auto">
+          <img
+            src={HeroGif}
+            alt="A gif showing the working of CourseRec"
+            className="w-full h-auto mx-auto rounded-2xl transform hover:scale-105 transition-all duration-500"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black opacity-40 rounded-2xl"></div>
         </div>
       </section>
 
@@ -162,8 +170,12 @@ export default function LandingPage() {
           </div>
 
           {/* Chat Demo */}
-          <div className="flex-1 w-full max-w-md sm:max-w-full h-64 sm:h-[400px] bg-gray-800 border border-dashed border-gray-600 rounded-xl flex items-center justify-center text-gray-400">
-            Chat Demo GIF Placeholder
+          <div className="max-w-4xl h-auto mx-auto flex-1 w-full sm:max-w-full sm:h-[400px] flex items-center justify-center">
+            <img
+            src={ChatNow}
+            alt="A gif showing the sign up process of CourseRec"
+            className="w-full h-auto mx-auto rounded-2xl transform hover:scale-105 transition-all duration-500"
+          />
           </div>
         </div>
       </section>
