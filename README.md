@@ -57,7 +57,7 @@ root/
 * docker
 
 ### `.env` file
-Create a `.env` file in the `backend` directory as show in the [Project Structure](##-project-structure). Inside the `.env` file store your OPENAI API key as such
+Create a `.env` file in the `backend` directory as show in the [Project Structure](https://github.com/HamzaGiTX786/Course-Rec/tree/master?tab=readme-ov-file#-project-structure). Inside the `.env` file store your OPENAI API key as such
 ```
 OPENAI_API_KEY = ....
 ```
