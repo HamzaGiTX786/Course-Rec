@@ -4,15 +4,14 @@ import os
 from pathlib import Path
 
 from coursrec import settings
+from .utils.rag_query import retrieve_top_k_chunks
 
 client = OpenAI()
 client.api_key = settings.OPENAI_API_KEY
 
 def testmodel(messages):
     # Prepend system prompt if not already present
-    system_prompt = {
-        "role": "system",
-        "content": (
+    base_prompt = (
             "You are a specialized assistant trained only on COIS courses and that recommends other COIS courses. "
             "If the question is outside this domain, politely decline to answer and state that you can only respond to questions to recommend or provide information about COIS courses. "
             "Since you are trained on COIS course data, you can also provide recommendations for COIS courses based on the prerequisite completed by the user. "
@@ -27,11 +26,18 @@ def testmodel(messages):
             "If a course has 'Multiple prerequisites' then the user must have completed all of the listed prerequisites to be recommended that course. "
             "If a user has not provided you that information, feel free to ask them for it."
         )
-    }
-
-    # Only add system message if not already present
+    
     if messages[0]["role"] != "system":
-        messages = [system_prompt] + messages
+        messages.insert(0, {"role": "system", "content": base_prompt})
+
+    query = messages[-1]["content"]
+    retrieved_chunks = retrieve_top_k_chunks(query)
+
+    # Inject retrieved context
+    context = "\n\n".join(retrieved_chunks)
+    rag_augmented_prompt = f"{messages[0]['content']}\n\nUse the following information:\n{context}"
+
+    messages[0]["content"] = rag_augmented_prompt
 
     completion = client.chat.completions.create(
         model="ft:gpt-4o-mini-2024-07-18:hamza::AwwppreQ",
